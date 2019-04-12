@@ -1,0 +1,50 @@
+{
+  "MerchantName": "Inacta",
+  "MerchantState": "ENABLED",
+  "CustomerName": "Inacta",
+  "DefaultCurrencyCode": "756",
+  "DefaultCryptoCurrencyCode": "BTC",
+  "MerchantNumber": "EC66F139",
+  "Currencies": [
+    {
+      "Name": "CHF",
+      "DisplayName": "CHF - Schweizerfranken",
+      "Symbol": null,
+      "Code": "756",
+      "IsCrypto": false,
+      "Min": 10,
+      "Max": 100000,
+      "Multiplier": 100
+    }
+  ],
+  "CryptoCurrencies": [
+    {
+      "Name": "BTC",
+      "DisplayName": "BTC - Bitcoin",
+      "Symbol": null,
+      "Code": "BTC",
+      "IsCrypto": true,
+      "Min": 1000,
+      "Max": 1000000000,
+      "Multiplier": 100000000
+    }
+  ],
+  "Terminal": {
+    "Key": "T53NF5",
+    "Name": "Inacta",
+    "Description": "Inacta (Auto-Created Terminal)"
+  },
+  "Layout": {
+    "LogoUrl": "/Images/btcs-logo.png",
+    "LogoBase64": null,
+    "Logo": [],
+    "Color": "#428bca",
+    "Css": ""
+  },
+  "CustomerDisplayName": "Inacta",
+  "CustomerPublicAddress": null,
+  "CustomerPublicEmail": null,
+  "CustomerPublicPhone": null,
+  "BaseFee": 0,
+  "FeePercentage": 2.5
+}
