@@ -20,22 +20,20 @@ class Payment {
   String hash;
 
   String toJson() {
-		return json.encode(
-  		{
-    		"Amount": amount,
-    		"TerminalNumber": terminalNumber,
-    		"MerchantNumber": merchantNumber,
-				"Description": description,
-				"Reference": reference,
-				"Email": email,
-				"FromCurrency": fromCurrency,
-				"ToCurrency": toCurrency,
-				"DeclineUrl": declineUrl,
-				"AcceptUrl": acceptUrl,
-				"CallbackUrl": callbackUrl,
-				"Hash": hash,
-  		}
-		);
+    return json.encode({
+      "Amount": amount,
+      "TerminalNumber": terminalNumber,
+      "MerchantNumber": merchantNumber,
+      "Description": description,
+      "Reference": reference,
+      "Email": email,
+      "FromCurrency": fromCurrency,
+      "ToCurrency": toCurrency,
+      "DeclineUrl": declineUrl,
+      "AcceptUrl": acceptUrl,
+      "CallbackUrl": callbackUrl,
+      "Hash": hash,
+    });
   }
 }
 
@@ -77,6 +75,13 @@ class Client {
     return await _client.post(
       _url.replace(path: "/api/CreatePaymentRequest"),
       body: payment.toJson(),
+      headers: _headers,
+    );
+  }
+
+  Future<http.Response> isChanged(String key) async {
+    return await _client.get(
+      _url.replace(path: "/api/isChanged", queryParameters: {"Key": key}),
       headers: _headers,
     );
   }

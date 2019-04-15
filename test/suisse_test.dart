@@ -67,15 +67,31 @@ void main() {
     });
 
     test('creates a correct hash', () async {
-			await client.createPayementRequest(payment);
-			var request = server.takeRequest();
+      await client.createPayementRequest(payment);
+      var request = server.takeRequest();
 
-			expect(json.decode(request.body)["Hash"], equals("90ea4b8c93da279d471d14ed140bf7feb8b719e6118c3e43f60a8af6c7f1554b"));
+      expect(
+          json.decode(request.body)["Hash"],
+          equals(
+              "7bdf8561df1f3cf8ab575a283f237cbd4d73be564dff2d0efce72fc0a7fb50b6"));
     });
 
-    test('returns a map with a identifier', () async {
-     var response = await client.createPayementRequest(payment);
-     expect(json.decode(response.body)["Key"], isNotNull);
+    test('returns a identifier for later reference', () async {
+      var response = await client.createPayementRequest(payment);
+
+      expect(json.decode(response.body)["Key"], isNotNull);
+    });
+
+    test('returns a URL for the QR code', () async {
+      var response = await client.createPayementRequest(payment);
+
+      expect(Uri.parse(json.decode(response.body)["QRData"]).scheme, "bitcoin");
+    });
+
+    test('returns amount of satoshis to be paid', () async {
+      var response = await client.createPayementRequest(payment);
+
+      expect(json.decode(response.body)["CCAmount"], 20063);
     });
   });
 
@@ -89,8 +105,6 @@ void main() {
     test('return a map with stuff', () async {
       var response = await client.getPaymentRequest(paymentNumber);
       expect(json.decode(response.body), isMap);
-
-
     });
 
     test('includes a hash in the request', () async {
@@ -103,5 +117,24 @@ void main() {
 
   group('updatePaymentRequest', () {});
 
-  group('isChanged', () {});
+  group('isChanged', () {
+    setUp(() async {
+      var cannedResponse =
+          await File('test/files/is_changed.json').readAsString();
+      server.enqueue(body: cannedResponse);
+    });
+
+    test('creates a simple GET request', () async {
+      await client.isChanged("some key");
+      var request = server.takeRequest();
+
+      expect(request.uri.query, "Key=some+key");
+    });
+
+    test('returns a simple hash', () async {
+      var response = await client.isChanged("some key");
+
+      expect(json.decode(response.body), equals({"returnValue": false}));
+    });
+  });
 }
