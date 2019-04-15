@@ -71,8 +71,9 @@ class Client {
   }
 
   Future<http.Response> createPayementRequest(Payment payment) async {
-    String hash = _hash("${payment.merchantNumber}${payment.terminalNumber}${payment.amount}${payment.fromCurrency}${payment.toCurrency}");
-		payment.hash = hash;
+    String hash = _hash(
+        "${payment.merchantNumber}${payment.terminalNumber}${payment.amount}${payment.fromCurrency}${payment.toCurrency}$_secret");
+    payment.hash = hash;
     return await _client.post(
       _url.replace(path: "/api/CreatePaymentRequest"),
       body: payment.toJson(),
