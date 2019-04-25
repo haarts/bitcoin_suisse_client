@@ -46,7 +46,7 @@ void main() {
 
     test('returns a bunch of configuration fields', () async {
       var response = await client.getMerchant(terminalNumber);
-      expect(json.decode(response.body)["MerchantName"], equals("Inacta"));
+      expect(json.decode(response.body)["MerchantName"], equals("<some-merchant>"));
     });
   });
 

@@ -45,7 +45,7 @@
   "ModifiedBy": "MerchantService",
   "MD5HashKey": "55c3a2265610f42f8d706298554c6354e34795557f39fe4fa5fba282d1a87fed",
   "TerminalNumber": "T53NF5",
-  "Email": "cho@bitcoinsuisse.ch",
+  "Email": "<some-mail>",
   "CallbackUrl": null,
   "AcceptUrl": null,
   "DeclineUrl": null,

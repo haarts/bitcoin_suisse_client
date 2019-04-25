@@ -1,10 +1,10 @@
 {
-  "MerchantName": "Inacta",
+  "MerchantName": "<some-merchant>",
   "MerchantState": "ENABLED",
-  "CustomerName": "Inacta",
+  "CustomerName": "<some-name>",
   "DefaultCurrencyCode": "756",
   "DefaultCryptoCurrencyCode": "BTC",
-  "MerchantNumber": "EC66F139",
+  "MerchantNumber": "<some-merchant-number",
   "Currencies": [
     {
       "Name": "CHF",
@@ -31,8 +31,8 @@
   ],
   "Terminal": {
     "Key": "T53NF5",
-    "Name": "Inacta",
-    "Description": "Inacta (Auto-Created Terminal)"
+    "Name": "<some-name>",
+    "Description": "<some-terminal-name>"
   },
   "Layout": {
     "LogoUrl": "/Images/btcs-logo.png",
@@ -41,7 +41,7 @@
     "Color": "#428bca",
     "Css": ""
   },
-  "CustomerDisplayName": "Inacta",
+  "CustomerDisplayName": "<some-customer-name>",
   "CustomerPublicAddress": null,
   "CustomerPublicEmail": null,
   "CustomerPublicPhone": null,
