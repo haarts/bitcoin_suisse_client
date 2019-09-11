@@ -1,5 +1,5 @@
 name: suisse
-description: A starting point for Dart libraries or applications.
+description: Library for communicating with the BitcoinSuisse API
 version: 0.1.0
 author: Kolibri POS authors <info@kolibripos.com>
 homepage: https://github.com/Kolibri-POS/bitcoin_suisse_client
