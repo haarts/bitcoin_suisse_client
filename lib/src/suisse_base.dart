@@ -4,6 +4,8 @@ import 'dart:io';
 import 'package:http/http.dart' as http;
 import 'package:crypto/crypto.dart';
 
+const List<String> supportedCountries = ["CH"];
+
 class Payment {
   String merchantNumber;
   String terminalNumber;
