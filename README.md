@@ -1,4 +1,7 @@
-A client for Bitcoin Suisse API.
+# A client for Bitcoin Suisse API.
+
+[![pub package](https://img.shields.io/pub/v/suisse.svg)](https://pub.dartlang.org/packages/suisse)
+[![CircleCI](https://circleci.com/gh/inapay/bitcoin_suisse_client.svg?style=svg)](https://circleci.com/gh/inapay/bitcoin_suisse_client)
 
 ## Usage
 
