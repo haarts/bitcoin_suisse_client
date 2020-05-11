@@ -9,16 +9,16 @@ import 'package:suisse/suisse.dart';
 MockWebServer server;
 Client client;
 String secret;
-const String sharedSecret = "some shared secret";
-const String merchantNumber = "some merchant number";
-const String terminalNumber = "some terminal number";
-const String paymentNumber = "some payment number";
+const String sharedSecret = 'some shared secret';
+const String merchantNumber = 'some merchant number';
+const String terminalNumber = 'some terminal number';
+const String paymentNumber = 'some payment number';
 
 void main() {
   setUp(() async {
     server = MockWebServer();
     await server.start();
-    client = Client(server.url, "some shared secret");
+    client = Client(server.url, 'some shared secret');
   });
 
   test('initialization', () {
@@ -38,16 +38,16 @@ void main() {
 
       // hash calculated with `echo -n 'some terminal numbersome shared secret' | sha256sum -`
       expect(
-        json.decode(request.body)["Hash"],
+        json.decode(request.body)['Hash'],
         equals(
-            "4768ecd6b30c1f4a7188efe8d583ce20acb5d3c9efa7b2a0fb0bfdedcca1b682"),
+            '4768ecd6b30c1f4a7188efe8d583ce20acb5d3c9efa7b2a0fb0bfdedcca1b682'),
       );
     });
 
     test('returns a bunch of configuration fields', () async {
       var response = await client.getMerchant(terminalNumber);
-      expect(json.decode(response.body)["MerchantName"],
-          equals("<some-merchant>"));
+      expect(json.decode(response.body)['MerchantName'],
+          equals('<some-merchant>'));
     });
   });
 
@@ -58,9 +58,9 @@ void main() {
         ..merchantNumber = merchantNumber
         ..terminalNumber = terminalNumber
         ..amount = 100
-        ..description = "some description"
-        ..fromCurrency = "CHF"
-        ..toCurrency = "BTC";
+        ..description = 'some description'
+        ..fromCurrency = 'CHF'
+        ..toCurrency = 'BTC';
 
       var cannedResponse =
           await File('test/files/create_payment_request.json').readAsString();
@@ -72,27 +72,27 @@ void main() {
       var request = server.takeRequest();
 
       expect(
-          json.decode(request.body)["Hash"],
+          json.decode(request.body)['Hash'],
           equals(
-              "7bdf8561df1f3cf8ab575a283f237cbd4d73be564dff2d0efce72fc0a7fb50b6"));
+              '7bdf8561df1f3cf8ab575a283f237cbd4d73be564dff2d0efce72fc0a7fb50b6'));
     });
 
     test('returns a identifier for later reference', () async {
       var response = await client.createPayementRequest(payment);
 
-      expect(json.decode(response.body)["Key"], isNotNull);
+      expect(json.decode(response.body)['Key'], isNotNull);
     });
 
     test('returns a URL for the QR code', () async {
       var response = await client.createPayementRequest(payment);
 
-      expect(Uri.parse(json.decode(response.body)["QRData"]).scheme, "bitcoin");
+      expect(Uri.parse(json.decode(response.body)['QRData']).scheme, 'bitcoin');
     });
 
     test('returns amount of satoshis to be paid', () async {
       var response = await client.createPayementRequest(payment);
 
-      expect(json.decode(response.body)["CCAmount"], 20063);
+      expect(json.decode(response.body)['CCAmount'], 20063);
     });
   });
 
@@ -112,7 +112,7 @@ void main() {
       await client.getPaymentRequest(paymentNumber);
 
       var request = server.takeRequest();
-      expect(json.decode(request.body).keys, containsAll(["Key", "Hash"]));
+      expect(json.decode(request.body).keys, containsAll(['Key', 'Hash']));
     });
   });
 
@@ -126,16 +126,16 @@ void main() {
     });
 
     test('creates a simple GET request', () async {
-      await client.isChanged("some key");
+      await client.isChanged('some key');
       var request = server.takeRequest();
 
-      expect(request.uri.query, "Key=some+key");
+      expect(request.uri.query, 'Key=some+key');
     });
 
     test('returns a simple hash', () async {
-      var response = await client.isChanged("some key");
+      var response = await client.isChanged('some key');
 
-      expect(json.decode(response.body), equals({"returnValue": false}));
+      expect(json.decode(response.body), equals({'returnValue': false}));
     });
   });
 }
