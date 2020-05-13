@@ -1,6 +1,8 @@
 import 'dart:convert';
 import 'package:suisse/suisse.dart';
 
+//ignore_for_file: avoid_print
+
 Future<void> main(List<String> args) async {
   var client = Client('https://test-paymentterminal.bitcoinsuisse.ch', args[0]);
   var payment = Payment()

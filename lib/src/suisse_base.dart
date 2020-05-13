@@ -40,6 +40,10 @@ class Payment {
 }
 
 class Client {
+  Client(String url, this._secret)
+      : _url = Uri.parse(url),
+        _client = http.Client();
+
   final Uri _url;
   final String _secret;
   final http.Client _client;
@@ -48,13 +52,9 @@ class Client {
     HttpHeaders.contentTypeHeader: 'application/json',
   };
 
-  Client(String url, this._secret)
-      : _url = Uri.parse(url),
-        _client = http.Client();
-
   Future<http.Response> getMerchant(String terminalNumber) async {
     var hash = _hash('$terminalNumber$_secret');
-    return await _client.post(
+    return _client.post(
       _url.replace(path: '/api/GetMerchant'),
       body: json.encode({'Key': terminalNumber, 'Hash': hash}),
       headers: _headers,
@@ -63,7 +63,7 @@ class Client {
 
   Future<http.Response> getPaymentRequest(String paymentNumber) async {
     var hash = _hash('$paymentNumber$_secret');
-    return await _client.post(
+    return _client.post(
       _url.replace(path: '/api/GetPaymentRequest'),
       body: json.encode({'Key': paymentNumber, 'Hash': hash}),
       headers: _headers,
@@ -74,7 +74,7 @@ class Client {
     var hash = _hash(
         '${payment.merchantNumber}${payment.terminalNumber}${payment.amount}${payment.fromCurrency}${payment.toCurrency}$_secret');
     payment.hash = hash;
-    return await _client.post(
+    return _client.post(
       _url.replace(path: '/api/CreatePaymentRequest'),
       body: payment.toJson(),
       headers: _headers,
@@ -82,7 +82,7 @@ class Client {
   }
 
   Future<http.Response> isChanged(String key) async {
-    return await _client.get(
+    return _client.get(
       _url.replace(path: '/api/isChanged', queryParameters: {'Key': key}),
       headers: _headers,
     );
