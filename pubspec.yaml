@@ -1,8 +1,8 @@
 name: suisse
 description: Library for communicating with the BitcoinSuisse API
 version: 0.1.1
-author: Kolibri POS authors <info@kolibripos.com>
-homepage: https://github.com/Kolibri-POS/bitcoin_suisse_client
+author: Harm Aarts <harm@aarts.email>
+homepage: https://github.com/haarts/bitcoin_suisse_client
 
 environment:
   sdk: '>=2.1.0 <3.0.0'
